@@ -1,0 +1,35 @@
+{
+  "name": "Fundamentals for Puppet",
+  "location": "Nuremberg",
+  "author": "Lennart Betz",
+  "release": "1.1",
+
+  "favicon": "image/global/favicon.ico",
+
+  "protected": ["presenter", "onepage", "print"],
+  "user": "netways",
+  "password": "awesome",
+
+  "templates" : {
+       "default"   : "global/templates/default.tpl"
+  },
+
+  "sections": [
+   {"section":"global/Pre/Title"},
+   {"section":"global/Pre/Training"},
+
+   {"section":"sections/training"},
+
+   {"section":"sections/basics"},
+   {"section":"sections/ral"},
+   {"section":"sections/resources"},
+   {"section":"sections/code_logic"},
+   {"section":"sections/modules"},
+   {"section":"sections/master"},
+   {"section":"sections/forge"},
+   {"section":"sections/optional"},
+
+   {"section":"global/Post"}
+
+  ]
+}
