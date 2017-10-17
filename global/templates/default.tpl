@@ -3,6 +3,6 @@
 </div>
 ~~~CONTENT~~~
 <div id="net-footer">
-    <p id="footer-left">Official Foreman Training</p>
+    <p id="footer-left">Fundamentals for Puppet Training</p>
     <p id="footer-right">by NETWAYS GmbH (www.netways.de)</p>
 </div>
