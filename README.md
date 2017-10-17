@@ -4,7 +4,6 @@ This training is designed as a three days hands-on training introducing Puppet. 
 with puppet take a look at the Puppet Advanced training. 
 
 In the training you will get basic knowlegde of the Domain-Specific-Language (DSL) of Puppet.
-install and configure Foreman to provide several ways of provisioning.
 
 Targeted audience are experienced Linux administrators in need of a configuration management
 solution for their systems.
