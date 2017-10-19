@@ -39,6 +39,10 @@ WantedBy=multi-user.target'
       type   => 'ssh-rsa',
       key    => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQD3lYc4I617lXh8lAz5k7B/bnH1gceZ85Un50UBP78gvymSVT6q7CBrSDqyH+n0Bso7zHQX5p3BbmFiIuWq5jskJ/6qc53LLuzO3Mi4h2SwEwhXnlnst1bgvkxNwH6rLpd3W+48j+jnYwb0YOIxldZb67MZPUT7bplMwWTMaWKz1i5qIWK2nTmJkSAp5vWFAorsl6fa+DtC8Id3pbt54TUxjA6L7bZ9xYma2SNav0YQsc4WFtCUZz5/uSSRlYQMFO5DwwIjSN4mXGmxHCtI+3WmMDXE1KUJ5S5ifC01qP9Js7YCP0qyMJTai39T++0NYZXjVpWyos9DOnuK9Y6i/Wi7',
   }
+
+  package { 'ruby':
+    ensure => installed,
+  }
  
   class { '::puppet':
     server                        => true,
@@ -64,7 +68,17 @@ WantedBy=multi-user.target'
     server_git_branch_map         => { 'master' => 'production' },
   }
 
-  package { 'ruby':
-    ensure => installed,
+  exec { 'remove-production-non-git':
+    path    => '/bin',
+    command => 'rm -rf /etc/puppetlabs/code/environments/production',
+    creates => '/etc/puppetlabs/code/environments/production/.git',
+  }
+  ~> exec { 'git-clone-production':
+    path        => '/bin',
+    cwd         => '/etc/puppetlabs/code/environments',
+    command     => 'git clone /home/git/puppet.git production',
+    user        => 'git',
+    group       => 'git',
+    refreshonly => true,
   }
 }

@@ -22,7 +22,7 @@ Vagrant.configure("2") do |config|
       rpm --import https://yum.puppet.com/RPM-GPG-KEY-puppet
       rpm -aq |grep puppetlabs-release 1>/dev/null || yum install -y https://yum.puppet.com/puppetlabs-release-pc1-el-7.noarch.rpm
       rpm -q puppet-agent || yum install -y puppet-agent
-      useradd -g vagrant -d /home/training -m training
+      useradd -g vagrant -d /home/training -m training 2>/dev/null
       sed -i 's|^training:.*$|training:$6$6kKwWz2c$eVYoDNonqIItGB9hsapr5LX3NkOM4sySMX189ABgAayxXYV1MnoUjt2zAQbvhN9pW/RfsQS8Z/iWGa0nCByRD0:17455:0:99999:7:::|g' /etc/shadow
       install -o training -g vagrant -m700 -d /home/training/.ssh
       echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD3lYc4I617lXh8lAz5k7B/bnH1gceZ85Un50UBP78gvymSVT6q7CBrSDqyH+n0Bso7zHQX5p3BbmFiIuWq5jskJ/6qc53LLuzO3Mi4h2SwEwhXnlnst1bgvkxNwH6rLpd3W+48j+jnYwb0YOIxldZb67MZPUT7bplMwWTMaWKz1i5qIWK2nTmJkSAp5vWFAorsl6fa+DtC8Id3pbt54TUxjA6L7bZ9xYma2SNav0YQsc4WFtCUZz5/uSSRlYQMFO5DwwIjSN4mXGmxHCtI+3WmMDXE1KUJ5S5ifC01qP9Js7YCP0qyMJTai39T++0NYZXjVpWyos9DOnuK9Y6i/Wi7 training@agent" > /home/training/.ssh/authorized_keys; chown training.vagrant /home/training/.ssh/authorized_keys
@@ -49,7 +49,7 @@ Vagrant.configure("2") do |config|
 
     agent.vm.provision "shell", inline: <<-SHELL
       rpm -q git || yum install -y git
-      useradd -g vagrant -d /home/training -m training
+      useradd -g vagrant -d /home/training -m training 2>/dev/null
       sed -i 's|^training:.*$|training:$6$6kKwWz2c$eVYoDNonqIItGB9hsapr5LX3NkOM4sySMX189ABgAayxXYV1MnoUjt2zAQbvhN9pW/RfsQS8Z/iWGa0nCByRD0:17455:0:99999:7:::|g' /etc/shadow
       install -o training -g vagrant -m700 -d /home/training/.ssh
       echo "-----BEGIN RSA PRIVATE KEY-----
@@ -83,6 +83,7 @@ l/zBfTzjQaADBBdUqx7pThEwuffduGcdudIMdl74Wm/sLKM9Fm624g==
       echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD3lYc4I617lXh8lAz5k7B/bnH1gceZ85Un50UBP78gvymSVT6q7CBrSDqyH+n0Bso7zHQX5p3BbmFiIuWq5jskJ/6qc53LLuzO3Mi4h2SwEwhXnlnst1bgvkxNwH6rLpd3W+48j+jnYwb0YOIxldZb67MZPUT7bplMwWTMaWKz1i5qIWK2nTmJkSAp5vWFAorsl6fa+DtC8Id3pbt54TUxjA6L7bZ9xYma2SNav0YQsc4WFtCUZz5/uSSRlYQMFO5DwwIjSN4mXGmxHCtI+3WmMDXE1KUJ5S5ifC01qP9Js7YCP0qyMJTai39T++0NYZXjVpWyos9DOnuK9Y6i/Wi7 training@agent" > /home/training/.ssh/id_rsa.pub
       chown training.vagrant /home/training/.ssh/id_rsa.pub; chmod 600 /home/training/.ssh/id_rsa.pub
       grep 192.168.56.101 || echo '192.168.56.101	puppet.localdomain	puppet' >> /etc/hosts
+      stat /home/training/puppet/.git 2>&1>/dev/null || sudo -u training bash -c 'git init /home/training/puppet;cd /home/training/puppet; git remote add origin git@puppet.localdomain:puppet.git'
     SHELL
   end
 
