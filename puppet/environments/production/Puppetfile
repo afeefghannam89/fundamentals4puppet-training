@@ -1,0 +1,7 @@
+forge "http://forge.puppetlabs.com"
+
+mod "theforeman/puppet",	"v8.0.3"
+mod "puppet-extlib", 		"v1.1.0"
+mod "puppetlabs-concat",	"v4.0.1"
+mod "puppetlabs-stdlib",	"v4.20.0"
+mod "theforeman-git",		"v3.0.0"
