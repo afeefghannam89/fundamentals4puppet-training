@@ -5,7 +5,6 @@ The original project for these files is the version of [NETWAYS](https://github.
 # Requirements
 
 * Vagrant, recommended version >1.8
-* Vagrant plugin vbguest
 * Virtualbox
 * r10k
 
@@ -13,7 +12,6 @@ On the over hand you can use puppet module install instead of r10k to install al
 
 Example for OSX:
 
-    $ sudo vagrant plugin install vagrant-vbguest
     $ sudo gem install r10k
 
 # Setup
