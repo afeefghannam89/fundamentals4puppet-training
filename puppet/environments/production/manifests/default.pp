@@ -72,6 +72,7 @@ WantedBy=multi-user.target'
     path    => '/bin',
     command => 'rm -rf /etc/puppetlabs/code/environments/production',
     creates => '/etc/puppetlabs/code/environments/production/.git',
+    require => Class['puppet'],
   }
   ~> exec { 'git-clone-production':
     path        => '/bin',
