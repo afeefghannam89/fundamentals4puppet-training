@@ -11,7 +11,7 @@ of Puppet modules and development from local prototype to deployment on Puppet M
 usage of modules provided by the Puppet forge and adding a graphical interface for monitoring the 
 infrastructure is covered.
 
-The material is based on Puppet 4.
+The material is based on Puppet 5.
 
 ~~~SECTION:handouts~~~
 
