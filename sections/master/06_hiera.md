@@ -206,4 +206,129 @@ Data in modules could replace perhaps the params.pp pattern commonly used for
 separation of parameters from code logic. A good blogpost on this can be found
 on https://www.devco.net/archives/2016/01/08/native-puppet-4-data-in-modules.php
 
+Puppet uses their NTP module for test and reference implementation, so have a look
+at https://github.com/puppetlabs/puppetlabs-ntp.
+
 ~~~ENDSECTION~~~
+
+!SLIDE smbullets small
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Data in modules
+
+* Objective:
+ * Move the params.pp pattern to data in modules
+* Steps:
+ * Create a hiera config for your module
+ * Create hiera data for your supported operating systems
+ * Adjust your base class
+
+!SLIDE supplemental exercises
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Data in modules
+
+## Objective:
+
+****
+
+* Move the params.pp pattern to data in modules
+
+## Steps:
+
+****
+
+* Create a hiera config for your module
+
+The hierarchie should contain levels for the full version, major version, distribution,
+operating system family and a common fallback.
+
+* Create hiera data for your supported operating systems
+
+Create a file for the hierarchie levels common and operating system family to support
+Red Hat and Debian.
+
+* Adjust your base class
+
+Remove the inheritance and rely on the parameter lookup.
+
+!SLIDE supplemental solutions
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Params.pp pattern
+
+****
+
+## Move the params.pp pattern to data in modules
+
+****
+
+### Create a hiera config for your module
+
+    $ vim ~/puppet/modules/apache/hiera.yaml
+    ---
+    version: 5
+    
+    defaults:
+      datadir: 'data'
+      data_hash: 'yaml_data'
+    
+    hierarchy:
+      - name: 'Full Version'
+        path: '%{facts.os.name}-%{facts.os.release.full}.yaml'
+    
+      - name: 'Major Version'
+        path: '%{facts.os.name}-%{facts.os.release.major}.yaml'
+    
+      - name: 'Distribution Name'
+        path: '%{facts.os.name}.yaml'
+    
+      - name: 'Operating System Family'
+        path: '%{facts.os.family}-family.yaml'
+    
+      - name: 'common'
+        path: 'common.yaml'
+
+### Create hiera data for your supported operating systems
+
+    $ mkdir ~/puppet/modules/apache/data
+    $ vim ~/puppet/modules/apache/data/common.yaml
+    ---
+    apache::ensure: 'stopped'
+    apache::enable: false
+    apache::package_name: 'httpd'
+    apache::config_dir: '~'
+    apache::main_config: '~/httpd.conf'
+    apache::conf_d: '~'
+    apache::service_name: 'httpd'
+    apache::ssl: false
+    $ vim ~/puppet/modules/apache/data/RedHat-family.yaml
+    ---
+    apache::ensure: 'running'
+    apache::enable: true
+    apache::package_name: 'httpd'
+    apache::config_dir: '/etc/httpd'
+    apache::main_config: '/etc/httpd/conf/httpd.conf'
+    apache::conf_d: '/etc/httpd/conf.d'
+    apache::service_name: 'httpd'
+    apache::ssl: true
+    $ vim ~/puppet/modules/apache/data/Debian-family.yaml
+    ---
+    apache::ensure: 'running'
+    apache::enable: true
+    apache::package_name: 'apache2'
+    apache::config_dir: '/etc/apache2'
+    apache::main_config: '/etc/apache2/apache2.conf'
+    apache::conf_d: '/etc/apache2/conf.d'
+    apache::service_name: 'apache2'
+    apache::ssl: false
+
+### Adjust your base class
+
+    $ vim ~/puppet/modules/apache/manifests/init.pp
+    class apache (
+      Enum['running','stopped'] $ensure,
+      Boolean                   $enable,
+      String                    $package_name,
+      String                    $config_dir,
+      String                    $main_config,
+      String                    $conf_d,
+      String                    $service_name,
+      Boolean                   $ssl,
+    ) {
+    ...
+

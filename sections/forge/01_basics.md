@@ -6,7 +6,7 @@ http://forge.puppet.com
 * Community plattform for modules
  * 4000+ Modules by many different authors
  * Searchable
- * Supported and Approved Modules
+ * Supported, Partner supported and Approved Modules
  * Number of Downloads and Scoring system
 * Command Line Interface `puppet module`
  * Search
@@ -15,7 +15,8 @@ http://forge.puppet.com
 
 ~~~SECTION:notes~~~
 
-* Supported Module: Support included with PE, tested and compatibility matrix avaiable
+* Supported Module: Support included with PE, tested and compatibility matrix available
+* Partner Module: Support included with PE, tested and compatibility matrix available offered by a Partner
 * Approved Module: Pass specific quality and usability requirements, recommended but not supported
 
 ~~~ENDSECTION~~~
@@ -28,9 +29,10 @@ With the Puppet Forge provides the vendor a community plattform for modules with
 of modules by many different authors, projects and companies. The website is searchable to easly find a
 module managing a specific software or solving a common problem. For quality indicators look for modules
 markes as supported which are included in support offered with Puppet Enterprise, tested and a compatibility
-matrix is given or approved which pass specific quality and usability requirements and are recommended but
-not supported. Other indicators are the number of downloads, the scoring system combining user scores and
-automatic tests and if provided the number of open issues.
+matrix is given, partner to indicate the same level of quality but support provided by a partner or approved
+which pass specific quality and usability requirements and are recommended but not supported. Other indicators
+are the number of downloads, the scoring system combining user scores and automatic tests and if provided the
+number of open issues.
 
 ~~~PAGEBREAK~~~
 

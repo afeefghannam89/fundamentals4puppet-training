@@ -1,6 +1,8 @@
 !SLIDE smbullets small
 # Repository - RHEL / Centos / Fedora
 
+* Puppet 5
+ * All-in-one package for ease of usage - provided by Puppet
 * Puppet 4
  * Puppet Collection - all-in-one package for ease of usage - provided by Puppet
  * Default Repository - packages according packaging guidelines - Fedora only
@@ -14,6 +16,8 @@
 !SLIDE smbullets small
 # Repository - Debian / Ubuntu
 
+* Puppet 5
+ * All-in-one package for ease of usage - provided by Puppet
 * Puppet 4
  * Puppet Collection - all-in-one package for ease of usage - provided by Puppet
 * Puppet 3
@@ -27,13 +31,13 @@
 
 As you can see there are many different ways to get Puppet installed on your system.
 
-The Puppet Collection provides you with tested and complementary versions of all the tools required for running
-Puppet 4 in one entire package provided by the vendor. But this also includes an additional version of openssl for example
-which has to be considered individually from the one included in your operating system when dealing with the system security
-in mind.
+With Version 5 Puppet dropped the naming and numbering schema of Puppet Collection, but keep the all-in-one packaging to
+provide tested and complementary versions of all the tools required for running Puppet in one entire package provided by
+the vendor. But this also includes an additional version of openssl for example which has to be considered individually
+from the one included in your operating system when dealing with the system security in mind.
 
-The same goes for Puppet Enterprise which is very similar but requires a subscription and in exchange provides support
-the vendor.
+The same goes for Puppet Collection for Puppet 4 and Puppet Enterprise which is very similar but requires a subscription
+and in exchange provides support the vendor.
 
 ~~~PAGEBREAK~~~
 
@@ -58,6 +62,7 @@ is required for your tool stack and which best suits your needs.
  * Puppet Node Manager - group nodes on facts
  * Puppet Code Manager - combines r10k, Jenkins and beaker for testing and deploying code
  * Puppet Configuration Manager - helps troubleshoot dependencies
+ * Task Management - combines bolt with Puppet Enterprise Console and Orchestration API
 * Supported Modules
 * Automated Provisioning for some plattforms
 * Vendor support and service
@@ -106,7 +111,7 @@ if you use the Open Source version and add components you require and perhaps bu
 
 ****
 
-* In this lab you install the Puppet agent provided by the Puppet Collection
+* In this lab you install the Puppet agent provided by Puppet
 
 ## Steps:
 
@@ -114,7 +119,7 @@ if you use the Open Source version and add components you require and perhaps bu
 
 * Make Puppet Collection available by installing the release repository
 
-URL: https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
+URL: http://yum.puppet.com/puppet5/puppet5-release-el-7.noarch.rpm
 
 * Inspect what version is installed on your master
 
@@ -133,13 +138,13 @@ You can successfully execute "puppet --version" and "facter --version".
 
 ****
 
-## Install the Puppet agent provided by the Puppet Collection
+## Install the Puppet agent provided by Puppet
 
 ****
 
 ### Make Puppet Collection available by installing the release repository
 
-    $ sudo yum install http://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm -y
+    $ sudo yum install http://yum.puppet.com/puppet5/puppet5-release-el-7.noarch.rpm -y
 
 ### Inspect what version is installed on your master
 
